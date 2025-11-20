@@ -1,0 +1,16 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore editor backups
+*.bak
+*.tmp
+*.swp
+*.html~
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore OS metadata
+ehthumbs.db
+Desktop.ini
