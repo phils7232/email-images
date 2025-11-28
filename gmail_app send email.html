@@ -1,0 +1,26 @@
+function sendNewsletterNoAttach() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Recipients");
+  var recipient = sheet.getRange("B2").getValue();
+
+  // Hosted PDF URL (GitHub raw link)
+  var pdfUrl = "https://phils7232.github.io/email-images/AF%20news%20letter.pdf";
+
+  // JPG from Drive (replace with your actual file ID)
+  var imageBlob = DriveApp.getFileById("1_a6oqbk7fo52irLWn7WYVNzTHjFFRG6W").getBlob();
+
+  var subject = "Community Newsletter";
+  var htmlBody =
+    '<p>Hello,</p>' +
+    '<p>You can view our latest newsletter online here: ' +
+    '<a href="' + pdfUrl + '" target="_blank">View Newsletter PDF</a></p>' +
+    '<p>Or click the image below:</p>' +
+    '<a href="' + pdfUrl + '" target="_blank">' +
+      '<img src="cid:previewImage" style="max-width:100%;height:auto;border:0;">' +
+    '</a>' +
+    '<p>Best regards,<br>Phil</p>';
+
+  GmailApp.sendEmail(recipient, subject, "Text version", {
+    htmlBody: htmlBody,
+    inlineImages: { previewImage: imageBlob }
+  });
+}
